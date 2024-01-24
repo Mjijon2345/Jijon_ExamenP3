@@ -14,8 +14,7 @@ namespace Jijon_ExamenP3.ContextDB
         public int id;
         [ObservableProperty]
         public string breedName;
-        [ObservableProperty]
-        public string imageUrl;
+       
     } 
     
 }

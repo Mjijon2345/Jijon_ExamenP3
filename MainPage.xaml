@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Jijon_ExamenP3.MainPage">
 
-    <ScrollView BackgroundColor="Blue">
+    <ScrollView BackgroundColor="#ffe6cc">
         <StackLayout Padding="20" Spacing="20" VerticalOptions="Center">
             <Label Text="🐾 Bienvenido a Explorador de Imágenes de Perros 🐶" HorizontalOptions="Center" FontSize="Title" TextColor="#6e4b21" />
 
@@ -33,7 +33,7 @@
                 <Button Text="Perro Aleatorio" Clicked="Button_Clicked" Grid.Column="1" BackgroundColor="#6e4b21" TextColor="White" CornerRadius="8" Margin="5" />
             </Grid>
 
-            <Label Text="MJ - 2024" HorizontalOptions="End" VerticalOptions="End" FontSize="Micro" TextColor="#8c735b" />
+            <Label Text="Mateo Jijon - Examen P3_Prgramacion IV" HorizontalOptions="End" VerticalOptions="End" FontSize="Micro" TextColor="#8c735b" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

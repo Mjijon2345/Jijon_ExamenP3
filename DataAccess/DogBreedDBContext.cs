@@ -1,23 +1,28 @@
-﻿using Jijon_ExamenP3.ContextDB;
+﻿
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Jijon_ExamenP3.Utilidades;
+using Jijon_ExamenP3.Modelos;
 
 namespace Jijon_ExamenP3.DataAccess
 {
-    internal class DogBreedDBContext : DbContext
+    public class DogBreedDBContext : DbContext
     {
-        
-        public DbSet<DogBreed> DogBreeds { get; set; }
+        public DbSet<DogBreedM> DogBreeds { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=myapp.db");
+            string conexionDB = $"Filename={ConexionDB.DevolverRuta("dogBreed.db")}";
+            optionsBuilder.UseSqlite(conexionDB);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DogBreedM>(entity =>
+            {
+                entity.HasKey(col => col.IdDog);
+                entity.Property(col => col.IdDog).IsRequired().ValueGeneratedOnAdd();
+            });
+        }
+
     }
 }
     
-

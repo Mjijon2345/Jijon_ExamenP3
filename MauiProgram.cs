@@ -1,4 +1,7 @@
-﻿namespace Jijon_ExamenP3;
+﻿using Jijon_ExamenP3.DataAccess;
+
+
+namespace Jijon_ExamenP3;
 
 public static class MauiProgram
 {
@@ -13,6 +16,9 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+        
+
+
+        return builder.Build();
 	}
 }

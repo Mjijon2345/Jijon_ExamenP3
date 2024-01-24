@@ -5,7 +5,7 @@ namespace Jijon_ExamenP3;
 
     public partial class MainPage : ContentPage
 {
-    private readonly DogApiService _dogApiService = new DogApiService();
+    private readonly DogApiServiceMJ _dogApiServicemj = new DogApiServiceMJ();
 
     public MainPage()
     {
@@ -16,12 +16,12 @@ namespace Jijon_ExamenP3;
     {
         try
         {
-            List<string> breeds = await _dogApiService.GetRandomDogBreeds();
+            List<string> breeds = await _dogApiServicemj.GetRandomDogBreeds();
 
             if (breeds != null && breeds.Any())
             {
                 string randomBreed = breeds[new Random().Next(0, breeds.Count)];
-                string imageUrl = await _dogApiService.GetRandomDogImageUrl(randomBreed);
+                string imageUrl = await _dogApiServicemj.GetRandomDogImageUrl(randomBreed);
 
                 BreedsLabel.Text = randomBreed;
                 DisplayDogImage(imageUrl);
@@ -45,7 +45,7 @@ namespace Jijon_ExamenP3;
 
             if (!string.IsNullOrEmpty(breedName))
             {
-                string imageUrl = await _dogApiService.GetRandomDogImageUrl(breedName);
+                string imageUrl = await _dogApiServicemj.GetRandomDogImageUrl(breedName);
 
                 if (!string.IsNullOrEmpty(imageUrl))
                 {
@@ -73,7 +73,7 @@ namespace Jijon_ExamenP3;
     }
 }
 
-public class DogApiService
+public class DogApiServiceMJ
 {
     private const string BreedListUrl = "https://dog.ceo/api/breeds/list";
     private const string RandomImageUrlFormat = "https://dog.ceo/api/breed/{0}/images/random";
