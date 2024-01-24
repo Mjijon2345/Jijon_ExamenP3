@@ -1,4 +1,7 @@
-﻿namespace Jijon_ExamenP3;
+﻿using Jijon_ExamenP3.DataAccess;
+using Jijon_ExamenP3.ContextDB;
+
+namespace Jijon_ExamenP3;
 
     public partial class MainPage : ContentPage
 {
@@ -118,8 +121,3 @@ public class DogApiService
         return breeds;
     }
 }
-
-
-
-
-
