@@ -1,24 +1,76 @@
 ﻿namespace Jijon_ExamenP3;
 
-public partial class MainPage : ContentPage
 {
-	int count = 0;
+    public partial class MainPage : ContentPage
+{
+    private readonly DogApiService _dogApiService = new DogApiService();
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    public MainPage()
+    {
+        InitializeComponent();
+    }
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            List<string> breeds = await _dogApiService.GetRandomDogBreeds();
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+            if (breeds != null && breeds.Any())
+            {
+                string randomBreed = breeds[new Random().Next(0, breeds.Count)];
+                string imageUrl = await _dogApiService.GetRandomDogImageUrl(randomBreed);
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+                BreedsLabel.Text = randomBreed;
+                DisplayDogImage(imageUrl);
+            }
+            else
+            {
+                BreedsLabel.Text = "Failed to fetch dog breeds";
+            }
+        }
+        catch (Exception ex)
+        {
+            BreedsLabel.Text = $"Error: {ex.Message}";
+        }
+    }
+
+    private async void SearchButton_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            string breedName = BreedNameEntry.Text.Trim();
+
+            if (!string.IsNullOrEmpty(breedName))
+            {
+                string imageUrl = await _dogApiService.GetRandomDogImageUrl(breedName);
+
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    BreedsLabel.Text = breedName;
+                    DisplayDogImage(imageUrl);
+                }
+                else
+                {
+                    BreedsLabel.Text = $"Breed '{breedName}' not found";
+                    Layout.Children.Clear();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            BreedsLabel.Text = $"Error: {ex.Message}";
+        }
+    }
+
+    private void DisplayDogImage(string imageUrl)
+    {
+        Layout.Children.Clear();
+        Image dogImage = new Image { Source = imageUrl };
+        Layout.Children.Add(dogImage);
+    }
+
 }
+
+
 
